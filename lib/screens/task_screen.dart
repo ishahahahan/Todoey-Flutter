@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/widgets/tasks_list.dart';
+import 'add_task_screen.dart';
 
 class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});
@@ -64,7 +65,21 @@ class TaskScreen extends StatelessWidget {
           Icons.add,
           color: Colors.white,
         ),
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+
+            // Puts modal above keyboard
+            isScrollControlled: true, // makes modal full height
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: const AddTaskScreen(),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
