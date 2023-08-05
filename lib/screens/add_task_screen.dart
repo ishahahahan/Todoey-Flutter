@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 // The Bottom Modal Sheet where we can add our tasks
 
 class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({super.key});
+  const AddTaskScreen({super.key, required this.addTaskCallback});
+
+  final void Function(String) addTaskCallback;
 
   @override
   Widget build(BuildContext context) {
+    late String newTaskTitle;
+
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -19,15 +23,20 @@ class AddTaskScreen extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 30, color: Colors.lightBlueAccent),
             ),
-            const TextField(
+            TextField(
               autofocus: true,
               textAlign: TextAlign.center,
+              onChanged: (newTask) {
+                newTaskTitle = newTask;
+              },
             ),
             const SizedBox(
               height: 20,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                addTaskCallback(newTaskTitle);
+              },
               style: const ButtonStyle(
                 backgroundColor:
                     MaterialStatePropertyAll(Colors.lightBlueAccent),
