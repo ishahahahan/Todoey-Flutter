@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/models/task_data.dart';
 
 // The Bottom Modal Sheet where we can add our tasks
 
 class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({super.key, required this.addTaskCallback});
-
-  final void Function(String) addTaskCallback;
+  const AddTaskScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,8 @@ class AddTaskScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                addTaskCallback(newTaskTitle);
+                Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle);
+                Navigator.pop(context);
               },
               style: const ButtonStyle(
                 backgroundColor:
